@@ -1,85 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+<!--PHP Calling Database-->
+
+<!--END-->
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>School Organizer</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+
+<!--TOP NAV-->
+    <div class="topnav">
+      <a href="index.html" style="text-decoration:none"> <img src="school.png" height="25px" width="25px" alt="" /> Home</a>
+      <a class="active"href="course.html" style="text-decoration:none"><img src="homework.png" height="25px" width="25px" alt="" /> Courses</a>
+      <a href="addFeedback.html" style="text-decoration:none"><img src="email.png" height="25px" width="25px" alt="" /> Contact</a>
+      <input type="text" placeholder="Search...">
+    </div>
+<!--END TOP NAV-->
+
+
+<body>
+  <main>
+  <section class="glass">
   
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>School Organizer</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
-      rel="stylesheet"/>
-    <link rel="stylesheet" href="./style.css" />
-  </head>
+  <div class="dashboard">
+  <div class="user"> </div>
 
+<!--LEFT-->   
+  <div class="links">
+    <div class="link">
+      <div class="link"><div class="card"><h2><a href="addTask.html" style="text-decoration:none">Add Task</a></h2></div></div></div>
+      <div class="link"><div class="card"><h2><a href="addAssignment.html" style="text-decoration:none">Add Assignment</a></h2></div></div></div>
+      <div class="link"><div class="pro"><h2><a href="account.html" style="text-decoration:none">Account</a></h2></div></div>
+    </div>          
+  </div>       
+  </div>
 
-  <body>
-    <main>
-      <section class="glass">
-        <div class="dashboard">
-          <div class="user">
-            <img src="" alt="" />
-            </div>
+<!--END LEFT MENU-->
 
-          <!--side menu-->
-         
-          <div class="links">
-            <div class="link">
-              <h3>
-                <a href="index.html"> <img src="school.png" height="50px" width="50px" alt="" />
-                 Home
-                </h3>
-                </a>
-              </div>
-              <div class="link">
-                <h3>
-                <a href="addCourse.html">
-                <img src="homework.png" height="50px" width="50px"alt="" />
-             Courses
-              </h3>
-                </a>
-              </div>
-              <div class="link">
-                <a href="Calendar.html">
-                  <h3> <img src="binary-code.png" height="50px" width="50px" alt="" />
-            Settings</h3>
-                </a>
-              </div>
-              <div class="link">
-                <h3><a href="contact.html">
-                <img src="question.png" height="50px" width="50px"alt="" />
-              Help</h3>
-                </a>
-              </div>
-            </div>
-            <div class="pro">
-              <h2>
-              <a href="account.html">Account</a>
-              </h2>
-          </div>
-        </div>
         <div class="games">
-          <div class="status">
-
-            <!--right-->
-            <h1>Assignment Organizer</h1>
-            
-          </div>
-          <div class="card1">
-            <div class="card1">
-              <img src="" alt="" />
-              <div class="card-info">
-             
+        <div class="card1">
+        <div class="card-info">
                 
-			<div class="form-popup" id="myForm">
+			  <div class="form-popup" id="myForm">
   				<form action="/action_page.php" class="form-container">
 					
+            <h1>Add Course</h1>
+            <hr>
 
-                    <h2>Add Course</h2>
+            <!--WARNING MESSAGE-->
+            <div class="alert alert-danger" role="alert" style="display: none;" id="alertUser">
+						<strong>WARNING: </strong> The Course Code is already used. Please entered a different Course Code.
+            </div>
+
+            <div class="alert alert-danger" role="alert" style="display: none;" id="warnUser">
+						<strong>WARNING: </strong> The Course Name is already used. Please entered a different Course Name.
+						</div>
+            <!--WARNING MESSAGE ENDS-->
+
                     <table>
                     <tr>
-                       <td><label for="course name"><b>Course Name</b></label></td>
-                      <td><input type="text" name="course name" required></td>
+                      <td><label for="course name"><b>Course Name</b></label></td>
+                      <td><input class="form-control" type="text" id="courseName" name="courseName" required></td>
                     </tr>
           
                     <tr>
@@ -89,68 +76,93 @@
                     
                     <tr>
                     <td><label for="details"><b> Course Details</b></label></td>
-                    <td><textarea name="details" cols="30" rows="6"></textarea></td>
+                    <td><textarea class="form-control" onkeyup="textCounter(this,'counter',250);" type="text" id="courseDetails" name="courseDetails" rows="5" required></textarea>
+                    <br>
+                     <input disabled maxlength="3" size="3" value="250" id="counter">
+                      <small>Characters remaining.</small></td>
                     </tr>
-          
+                    <script>
+                      function textCounter(field,field2,maxlimit)
+                      {
+                         var countfield = document.getElementById(field2);
+                         if ( field.value.length > maxlimit ) {
+                            field.value = field.value.substring( 0, maxlimit );
+                            return false;
+                         } else {
+                            countfield.value = maxlimit - field.value.length;
+                         }
+                      }
+                      </script>
                     <tr>
                       <td><label for="instructor"><b>Instructor</b></label></td>
-                      <td><input type="text" name="instructor"></td>
+                      <td><input class="form-control" type="text" id="instructorName" name="instructorName" required></td>
                     </tr>
                         
                     <tr>
                       <td><label for="instructor"><b>Instructor Phone</b></label></td>
-                      <td><input type="text" name="instructor phone"></td>
+                      <td><input class="form-control" type="text" id="instructorPhone" name="instructorPhone" required></td>
                     </tr>
 
                     <tr>
                       <td><label for="instructor email"><b>Instructor Email</b></label></td>
-                      <td><input type="text" name="instructor email"></td>
+                      <td><input class="form-control" type="text" id="instructorEmail" name="instructorEmail" required></td>
                     </tr>
                     
                     <tr>
                       <td><label for="instructor office"><b>Instructor Office</b></label></td>
-                      <td> <input type="text" name="instructor office"></td>
+                      <td> <input class="form-control" type="text" id="instructorOffice" name="instructorOffice" required></td>
                     </tr>
                     
                     <tr>
                       <td><label for="instructor office hours"><b>Office Hours</b></label></td>
-                      <td><input type="text" name="instructor office hours"></td>
+                      <td><input class="form-control" type="text" id="instructorHours" name="instructorHours" required></td>
                     </tr>                
                     
                     <tr>
-                     <td><button type="add" class="btn">Add Course</button></td>
-                     <td><button type="button" class="btn cancel" onclick="closeForm()">Cancel</button></td>
+                     <td><input type="submit" name="submit" class="btn btn-primary" value="Add Course" onclick="addModule()"></td>
+                     <td><input type="reset" class="btn btn-default" value="Cancel" onclick="goBack()"></td>
+                     
                     </tr>
 
-                    </table></form>
-			</div>
+                  </table></form>
 
-		<script>
-			function openForm() {
-  				document.getElementById("myForm").style.display = "block";
-			}
+    <script>
+		function goBack() {
+			window.location.href = 'index.html';
+		}
+	  </script>
 
-			function closeForm() {
-  				document.getElementById("myForm").style.display = "none";
-			}
-		</script>
-		
-	</div>
-</div>
-                
-              
-            </div>
-            
-          </div>
+    <script>
+    function addModule() {
+    window.location.href = 'index.html';
+      }
+      </script>
+
+<script type="text/javascript">
+	function YNconfirm() { 
+	 if (window.confirm('Module Saved!'))
+	 {
+	   window.location.href = 'index.html';
+	 }
+	}
+</script>
+                  </div>
+                  </div>
+                  </div>
+                                   
         </div>
-      </section>
-          </main>
+        </div>
+        </div>
 
-    <!--circle in the background-->
-    <div class="circle1"></div>
-    <div class="circle2"></div>
+</section>
+</main>
+
+<!--circle in the background-->
+<div class="circle1"></div>
+<div class="circle2"></div>
 
   
-  </body>
-  <footer><a href="https://www.flaticon.com/free-icons/question" title="question icons">Question icons created by Roundicons - Flaticon</a></footer>
+</body>
+
+<footer><a href="https://www.flaticon.com/free-icons/question" title="question icons">Question icons created by Roundicons - Flaticon</a></footer>
 </html>
